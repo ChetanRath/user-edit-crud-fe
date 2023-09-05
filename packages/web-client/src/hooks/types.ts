@@ -1,9 +1,7 @@
-import { GenericType } from "utils/types";
+export type AsyncFn<T, P> = ( args: P ) => Promise<T>;
 
-export type AsyncFn<T> = ( args: T ) => Promise<Record<string, unknown>>;
-
-export interface AsyncFunctionUtility {
+export interface AsyncFunctionUtility<T> {
   isLoading: boolean;
   err: null | unknown;
-  res: GenericType;
+  res: T | null;
 }

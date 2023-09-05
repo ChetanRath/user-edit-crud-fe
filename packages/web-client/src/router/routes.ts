@@ -11,11 +11,15 @@ export const routes: RouteProps[] = [
     component: Home,
   },
   {
+    path: PageURL.BASE,
+    component: Home,
+  },
+  {
     path: PageURL.CREATE_USER,
     component: CreateUser,
   },
   {
-    path: PageURL.ROOT,
+    path: PageURL.UPDATE_USER,
     component: UpdateUser,
   },
 ];
