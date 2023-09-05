@@ -1,6 +1,5 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document } from 'mongoose';
-import { PaidPlans } from 'src/user/user.common';
 
 export type UserDocument = User & Document;
 
@@ -21,18 +20,14 @@ export class User {
   @Prop({ required: true, default: 1 })
   active: boolean;
 
-  @Prop({
-    type: String,
-    enum: PaidPlans,
-    default: PaidPlans.NoPlan,
-  })
-  paid_plan: string;
-
-  @Prop({ required: true })
-  plan_expiring: Date;
-
   @Prop()
   nickname: string;
+
+  @Prop()
+  address: string;
+
+  @Prop()
+  phoneNumber: string;
 
   @Prop({ default: new Date() })
   createdAt?: Date;

@@ -1,5 +1,4 @@
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
-import { PaidPlans } from './user.common';
 
 export class CreateUserDto {
   @ApiProperty({ type: 'string', required: true })
@@ -17,9 +16,6 @@ export class CreateUserDto {
 
   @ApiProperty({ type: 'string', required: true })
   password: string;
-
-  @ApiPropertyOptional({ enum: PaidPlans })
-  paid_plan: PaidPlans;
 }
 
 export class UpdateUserDto {
@@ -37,9 +33,6 @@ export class UpdateUserDto {
 
   @ApiPropertyOptional({ type: 'string' })
   password: string;
-
-  @ApiPropertyOptional({ enum: PaidPlans })
-  paid_plan: PaidPlans;
 }
 
 export class UpdateUserPasswordDto {

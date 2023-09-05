@@ -2,8 +2,9 @@ import { HttpStatus, Injectable, Logger } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { User, UserDocument } from 'src/schemas/user.schema';
-import { UpdateUserDto } from './users.dto';
+import { CreateUserDto, UpdateUserDto } from './users.dto';
 import CustomHttpException from 'src/utils/CustomHttpException';
+import * as crypto from 'crypto';
 
 @Injectable()
 export class UserService {
@@ -35,6 +36,20 @@ export class UserService {
         message: `Error  getting data ${e?.message}`,
       });
     }
+  }
+
+  async createUser(userData: CreateUserDto) {
+    this.logger.log(`Hashing Password`);
+    const hash = crypto
+      .createHash('sha256')
+      .update(userData.password)
+      .digest('hex');
+    this.logger.log(`Creating User`, hash);
+    await this.userModel.create({
+      ...userData,
+      password: hash,
+    });
+    return {};
   }
 
   async updateUser(id: string, updatedData: UpdateUserDto) {
