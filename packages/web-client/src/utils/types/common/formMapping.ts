@@ -7,6 +7,7 @@ export const updateFormModel = [
       required: "First Name is required",
     },
     tfProps: {
+      label: "First Name",
       placeholder: "Your First Name",
     },
   },
@@ -16,12 +17,14 @@ export const updateFormModel = [
       required: "Last Name is required",
     },
     tfProps: {
+      label: "Last Name",
       placeholder: "Your Last Name",
     },
   },
   {
     name: "email",
     tfProps: {
+      label: "Email",
       placeholder: "Enter your email",
       disabled: true,
     },
@@ -29,12 +32,14 @@ export const updateFormModel = [
   {
     name: "nickname",
     tfProps: {
+      label: "Nickname",
       placeholder: "Your nickname",
     },
   },
   {
     name: "address",
     tfProps: {
+      label: "Address",
       placeholder: "Your home address",
     },
   },
@@ -48,6 +53,7 @@ export const updateFormModel = [
       },
     },
     tfProps: {
+      label: "Phone Number",
       placeholder: "Enter your Phone No",
     },
   },
@@ -60,6 +66,7 @@ export const createFormModel = [
       required: "First Name is required",
     },
     tfProps: {
+      label: "First Name",
       placeholder: "Your First Name",
     },
   },
@@ -69,6 +76,7 @@ export const createFormModel = [
       required: "Last Name is required",
     },
     tfProps: {
+      label: "Last Name",
       placeholder: "Your Last Name",
     },
   },
@@ -82,18 +90,21 @@ export const createFormModel = [
       },
     },
     tfProps: {
+      label: "Email",
       placeholder: "Enter your email",
     },
   },
   {
     name: "nickname",
     tfProps: {
+      label: "Nickname",
       placeholder: "Your nickname",
     },
   },
   {
     name: "address",
     tfProps: {
+      label: "Address",
       placeholder: "Your home address",
     },
   },
@@ -107,6 +118,7 @@ export const createFormModel = [
       },
     },
     tfProps: {
+      label: "Phone Number",
       placeholder: "Enter your Phone No",
     },
   },

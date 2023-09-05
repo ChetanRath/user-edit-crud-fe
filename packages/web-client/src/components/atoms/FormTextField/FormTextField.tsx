@@ -18,6 +18,7 @@ export const FormTextField: React.FC<FormTextFieldProps> = ({ defaultValue = "",
 
         return (
           <TextField
+            variant='outlined'
             InputLabelProps={{ shrink: true }}
             value={field.value === undefined || field.value === null ? "" : field.value}
             fullWidth
