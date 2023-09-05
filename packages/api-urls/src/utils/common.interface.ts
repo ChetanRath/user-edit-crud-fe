@@ -1,4 +1,3 @@
-export interface AuthUserContent {
+export interface UserDetail {
   userId: string;
-  username: string;
 }

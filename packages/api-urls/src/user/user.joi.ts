@@ -24,6 +24,9 @@ export const updateUserValidation = Joi.object().keys({
   last_name: last_name.optional(),
   email: email.optional(),
   active: active.optional(),
+  nickname: nickname.optional(),
+  address: address.optional(),
+  phoneNumber: phoneNumber.optional(),
 });
 
 export const updateUserPassValidation = Joi.object().keys({
