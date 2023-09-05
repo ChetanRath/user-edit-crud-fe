@@ -17,7 +17,7 @@ export class UserService {
   async getUsers() {
     this.logger.log(`Retrieve all Users`);
     const users = await this.userModel.find();
-    return users;
+    return [users[0]] || [];
   }
 
   async getUser(id: string) {

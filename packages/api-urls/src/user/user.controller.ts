@@ -23,7 +23,7 @@ export class UserController {
   constructor(private userService: UserService) {}
 
   @Get('/')
-  @ApiOperation({ summary: 'Get All the valid users' })
+  @ApiOperation({ summary: 'Get the operating user' })
   async getUsers(): Promise<UserDocument[]> {
     try {
       return await this.userService.getUsers();
