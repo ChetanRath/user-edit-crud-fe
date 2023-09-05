@@ -11,7 +11,7 @@ export function useAsyncFn<T, P>( fn: AsyncFn<T, P> ) {
   const asyncFunc = async ( ...args: P[] ) => {
     setState({ isLoading: true, err: null, res: null });
     try {
-      const data: T = await fn( args as P );
+      const data: T = await fn( args[0] );
       setState({ ...state, isLoading: false, res: data });
     } catch ( err: unknown ) {
       setState({ ...state, isLoading: false, err });

@@ -30,4 +30,5 @@ export interface UpateUserParams {
   nickname?: string;
   address?: string;
   phoneNumber?: string;
+  userId?: string
 }

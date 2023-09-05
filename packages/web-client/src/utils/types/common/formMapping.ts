@@ -2,7 +2,7 @@ import { EMAIL_VALIDATION_REGEX } from "./constants";
 
 export const updateFormModel = [
   {
-    name: "firstName",
+    name: "first_name",
     rhfProps: {
       required: "First Name is required",
     },
@@ -11,7 +11,7 @@ export const updateFormModel = [
     },
   },
   {
-    name: "lastName",
+    name: "last_name",
     rhfProps: {
       required: "Last Name is required",
     },
@@ -55,7 +55,7 @@ export const updateFormModel = [
 
 export const createFormModel = [
   {
-    name: "firstName",
+    name: "first_name",
     rhfProps: {
       required: "First Name is required",
     },
@@ -64,7 +64,7 @@ export const createFormModel = [
     },
   },
   {
-    name: "lastName",
+    name: "last_name",
     rhfProps: {
       required: "Last Name is required",
     },

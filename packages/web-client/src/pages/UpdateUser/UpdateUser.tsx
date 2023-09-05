@@ -1,10 +1,14 @@
-import React from "react";
+import React, { useEffect, useMemo } from "react";
 import { FormProvider, useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { Box, Typography } from "@mui/material";
 import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
+import { UpateUserParams, userApi } from "api";
+import { useAsyncFn } from "hooks/useAsync";
+import { useEffectOnce } from "hooks/useEffectOnce";
 import { PageURL } from "router/pageURL";
+import { UserForm } from "utils/types";
 import { updateFormModel } from "utils/types/common/formMapping";
 
 import { FormTextField } from "components/atoms/FormTextField";
@@ -12,9 +16,29 @@ import { FormTextField } from "components/atoms/FormTextField";
 import "./style.scss";
 
 export const UpdateUser = ({ buttonName = "Update" }: any ) => {
-  const form = useForm({
+  const searchParams = useParams();
+  const { isLoading, res: userData, asyncFunc: getUserDetail } = useAsyncFn( userApi.getUserDetail );
+  const { isLoading: isUpdateLoading, asyncFunc: updateUser } = useAsyncFn( userApi.updateUser );
+
+  const defaults = useMemo( () => {
+    if( userData ) {
+      return {
+        first_name: userData.first_name,
+        last_name: userData.last_name,
+        address: userData.address,
+        email: userData.email,
+        nickname: userData.nickname,
+        phoneNumber: userData.phoneNumber
+      };
+    }
+  }, [ userData ] );
+
+
+  const form = useForm<UserForm>({
     mode: "onChange",
+    defaultValues: defaults
   });
+
   const {
     register,
     handleSubmit,
@@ -23,11 +47,18 @@ export const UpdateUser = ({ buttonName = "Update" }: any ) => {
     getValues,
   } = form;
 
+  useEffectOnce( () => {
+    searchParams?.userId && getUserDetail( searchParams.userId );
+  });
+
+  useEffect( () => form.reset( defaults ), [ defaults ] );
+
   watch();
 
-  const onSubmit = ( data: any ) => {
-    console.log( "877779700000", data );
+  const onSubmit = ( data: UpateUserParams ) => {
+    searchParams?.userId && updateUser({ ...data, userId: searchParams.userId });
   };
+
 
   return (
     <div className='home__container'>
@@ -49,7 +80,7 @@ export const UpdateUser = ({ buttonName = "Update" }: any ) => {
             {updateFormModel.map( ( item, index ) => (
               <Grid item xs={12} md={6} key={index}>
                 <FormTextField
-                  {...register( item.name, {
+                  {...register( item.name as keyof UserForm, {
                     ...item.rhfProps,
                   })}
                   textFieldProps={item.tfProps}
