@@ -2,7 +2,6 @@ import React, { useEffect, useMemo } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import { Link, useParams } from "react-router-dom";
 import { Box, Typography } from "@mui/material";
-import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
 import { UpateUserParams, userApi } from "api";
 import { useAsyncFn } from "hooks/useAsync";
@@ -12,12 +11,13 @@ import { UserForm } from "utils/types";
 import { updateFormModel } from "utils/types/common/formMapping";
 
 import { FormTextField } from "components/atoms/FormTextField";
+import { LoadingButton } from "components/atoms/LoadingButton";
 
 import "./style.scss";
 
 export const UpdateUser = ({ buttonName = "Update" }: any ) => {
   const searchParams = useParams();
-  const { isLoading, res: userData, asyncFunc: getUserDetail } = useAsyncFn( userApi.getUserDetail );
+  const { res: userData, asyncFunc: getUserDetail } = useAsyncFn( userApi.getUserDetail );
   const { isLoading: isUpdateLoading, asyncFunc: updateUser } = useAsyncFn( userApi.updateUser );
 
   const defaults = useMemo( () => {
@@ -88,9 +88,14 @@ export const UpdateUser = ({ buttonName = "Update" }: any ) => {
               </Grid>
             ) )}
             <Grid item xs={12} alignItems={"center"}>
-              <Button variant='contained' type='submit'>
+              <LoadingButton
+                isLoading={isUpdateLoading}
+                buttonProps={{
+                  variant: "contained",
+                  type: "submit"
+                }}>
                 {buttonName}
-              </Button>
+              </LoadingButton>
             </Grid>
           </Grid>
         </form>
