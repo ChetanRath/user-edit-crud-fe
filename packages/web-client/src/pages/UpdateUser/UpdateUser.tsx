@@ -52,7 +52,7 @@ export const UpdateUser = ({ buttonName = "Update" }: any ) => {
     searchParams?.userId && getUserDetail( searchParams.userId );
   });
 
-  useEffect( () => form.reset( defaults ), [ defaults ] );
+  useEffect( () => form.reset( defaults ), [ defaults, form ] );
 
   watch();
 
