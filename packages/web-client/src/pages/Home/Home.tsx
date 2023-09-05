@@ -1,6 +1,7 @@
 import React from "react";
 import { FormProvider, useForm } from "react-hook-form";
-import { Button, Grid } from "@mui/material";
+import Button from "@mui/material/Button";
+import Grid from "@mui/material/Grid";
 import { createFormModel } from "utils/types/common/formMapping";
 
 import { FormTextField } from "components/atoms/FormTextField";
