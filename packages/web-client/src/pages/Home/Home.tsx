@@ -1,11 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
-import { Grid } from "@mui/material";
+import { Button, Grid } from "@mui/material";
 import { EMAIL_VALIDATION_REGEX } from "utils/types/common/constants";
 
 import { FormTextField } from "components/atoms/FormTextField";
 
+import "./style.css";
+
 export const Home = () => {
+  const [ isUpdate, setisUpdate ] = useState( false );
   const form = useForm({
     mode: "onChange",
   });
@@ -14,18 +17,28 @@ export const Home = () => {
     handleSubmit,
     watch,
     formState: { errors },
+    getValues,
   } = form;
+
+  watch();
+
+  console.log( "asasasas", getValues() );
+
+  const onSubmit = ( data: any ) => {
+    console.log( "877779700000", data );
+  };
+
   return (
-    <div>
-      <h1> User details </h1>
+    <div className='home__container'>
+      <h1> Update user details </h1>
       <FormProvider {...form}>
         <form
           onSubmit={e => {
             e.preventDefault();
-            // handleSubmit(onSubmit)();
+            handleSubmit( onSubmit )();
           }}
         >
-          <Grid container>
+          <Grid container rowSpacing={4} columnSpacing={{ xs: 3 }}>
             <Grid item xs={12} md={6}>
               <FormTextField
                 {...register( "firstName", {
@@ -51,7 +64,7 @@ export const Home = () => {
                     message: "Invalid email address",
                   },
                 })}
-                textFieldProps={{ placeholder: "Enter your email" }}
+                textFieldProps={{ placeholder: "Enter your email", disabled: true }}
               />
             </Grid>
             <Grid item xs={12} md={6}>
@@ -61,7 +74,21 @@ export const Home = () => {
               <FormTextField {...register( "address" )} textFieldProps={{ placeholder: "Enter your address" }} />
             </Grid>
             <Grid item xs={12} md={6}>
-              <FormTextField {...register( "phoneNumber" )} textFieldProps={{ placeholder: "Enter your Phone No." }} />
+              <FormTextField
+                {...register( "phoneNumber", {
+                  maxLength: 13,
+                  pattern: {
+                    value: /^[0-9]+$/,
+                    message: "Enter valid Ph No.",
+                  },
+                })}
+                textFieldProps={{ placeholder: "Enter your Phone No." }}
+              />
+            </Grid>
+            <Grid item xs={12} alignItems={"center"}>
+              <Button variant='contained' type='submit'>
+                Update
+              </Button>
             </Grid>
           </Grid>
         </form>
