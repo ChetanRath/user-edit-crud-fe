@@ -1,18 +1,23 @@
 import React from "react";
 import { FormProvider, useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Box, Typography } from "@mui/material";
-import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
+import { AddNewUserParams, userApi } from "api";
+import { useAsyncFn } from "hooks/useAsync";
 import { PageURL } from "router/pageURL";
+import { UserForm } from "utils/types";
 import { createFormModel } from "utils/types/common/formMapping";
 
 import { FormTextField } from "components/atoms/FormTextField";
+import { LoadingButton } from "components/atoms/LoadingButton";
 
 import "./style.scss";
 
 export const CreateUser = ({ buttonName = "Create" }: any ) => {
-  const form = useForm({
+  const { isLoading, asyncFunc: addUser } = useAsyncFn( userApi.addUser );
+  const navigate = useNavigate();
+  const form = useForm<UserForm>({
     mode: "onChange",
   });
   const {
@@ -25,10 +30,9 @@ export const CreateUser = ({ buttonName = "Create" }: any ) => {
 
   watch();
 
-  console.log( "asasasas", getValues() );
-
-  const onSubmit = ( data: any ) => {
-    console.log( "877779700000", data );
+  const onSubmit = async ( userData: AddNewUserParams ) => {
+    await addUser( userData );
+    navigate( PageURL.ROOT );
   };
 
   return (
@@ -51,7 +55,7 @@ export const CreateUser = ({ buttonName = "Create" }: any ) => {
             {createFormModel.map( ( item, index ) => (
               <Grid item xs={12} md={6} key={index}>
                 <FormTextField
-                  {...register( item.name, {
+                  {...register( item.name  as keyof UserForm, {
                     ...item.rhfProps,
                   })}
                   textFieldProps={item.tfProps}
@@ -59,9 +63,14 @@ export const CreateUser = ({ buttonName = "Create" }: any ) => {
               </Grid>
             ) )}
             <Grid item xs={12} alignItems={"center"}>
-              <Button variant='contained' type='submit'>
+              <LoadingButton
+                isLoading={isLoading}
+                buttonProps={{
+                  variant: "contained",
+                  type: "submit"
+                }}>
                 {buttonName}
-              </Button>
+              </LoadingButton>
             </Grid>
           </Grid>
         </form>

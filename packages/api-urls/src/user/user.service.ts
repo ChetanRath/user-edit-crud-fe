@@ -28,7 +28,6 @@ export class UserService {
         .findOne({
           _id: id,
         })
-        .select({ password: 0 })
         .lean();
       return users;
     } catch (e) {
@@ -40,15 +39,9 @@ export class UserService {
   }
 
   async createUser(userData: CreateUserDto) {
-    this.logger.log(`Hashing Password`);
-    const hash = crypto
-      .createHash('sha256')
-      .update(userData.password)
-      .digest('hex');
-    this.logger.log(`Creating User`, hash);
+    this.logger.log(`Creating User`);
     await this.userModel.create({
       ...userData,
-      password: hash,
     });
     return {};
   }

@@ -13,9 +13,6 @@ export class CreateUserDto {
     description: 'Should be a valid email',
   })
   email: string;
-
-  @ApiProperty({ type: 'string', required: true })
-  password: string;
 }
 
 export class UpdateUserDto {
@@ -30,12 +27,4 @@ export class UpdateUserDto {
     description: 'Should be a valid email',
   })
   email: string;
-
-  @ApiPropertyOptional({ type: 'string' })
-  password: string;
-}
-
-export class UpdateUserPasswordDto {
-  @ApiPropertyOptional({ type: 'string' })
-  password: string;
 }

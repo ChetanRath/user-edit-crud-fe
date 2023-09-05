@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo } from "react";
 import { FormProvider, useForm } from "react-hook-form";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { Box, Typography } from "@mui/material";
 import Grid from "@mui/material/Grid";
 import { UpateUserParams, userApi } from "api";
@@ -17,6 +17,7 @@ import "./style.scss";
 
 export const UpdateUser = ({ buttonName = "Update" }: any ) => {
   const searchParams = useParams();
+  const navigate = useNavigate();
   const { res: userData, asyncFunc: getUserDetail } = useAsyncFn( userApi.getUserDetail );
   const { isLoading: isUpdateLoading, asyncFunc: updateUser } = useAsyncFn( userApi.updateUser );
 
@@ -55,8 +56,11 @@ export const UpdateUser = ({ buttonName = "Update" }: any ) => {
 
   watch();
 
-  const onSubmit = ( data: UpateUserParams ) => {
-    searchParams?.userId && updateUser({ ...data, userId: searchParams.userId });
+  const onSubmit = async ( data: UpateUserParams ) => {
+    if( searchParams?.userId ) {
+      await updateUser({ ...data, userId: searchParams.userId });
+      navigate( PageURL.BASE );
+    }
   };
 
 

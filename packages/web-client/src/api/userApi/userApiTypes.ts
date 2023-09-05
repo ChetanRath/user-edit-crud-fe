@@ -3,7 +3,6 @@ export interface User {
   first_name: string;
   last_name: string;
   email: string;
-  password: string;
   active: boolean;
   nickname: string;
   address: string;
@@ -16,7 +15,6 @@ export interface AddNewUserParams {
   first_name: string;
   last_name: string;
   email: string;
-  password: string;
   active?: boolean;
   nickname?: string;
   address?: string;
