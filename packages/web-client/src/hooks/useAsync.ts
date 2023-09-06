@@ -2,16 +2,16 @@ import { useState } from "react";
 
 import { AsyncFn, AsyncFunctionUtility } from "./types";
 
-export function useAsyncFn<T, P>( fn: AsyncFn<T, P> ) {
-  const [ state, setState ] = useState<AsyncFunctionUtility<T>>({
+export function useAsyncFn<Response, Params>( fn: AsyncFn<Response, Params> ) {
+  const [ state, setState ] = useState<AsyncFunctionUtility<Response>>({
     isLoading: false,
     err: null,
     res: null,
   });
-  const asyncFunc = async ( ...args: P[] ) => {
+  const asyncFunc = async ( ...args: Params[] ) => {
     setState({ isLoading: true, err: null, res: null });
     try {
-      const data: T = await fn( args[0] );
+      const data: Response = await fn( args[0] );
       setTimeout( () => setState({ ...state, isLoading: false, res: data, err: null }), 1500 );
     } catch ( err: unknown ) {
       setState({ ...state, isLoading: false, err });
