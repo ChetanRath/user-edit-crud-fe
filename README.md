@@ -1,7 +1,6 @@
 # template-bp
 
-This is a mono-repository consisting different applications like web-client, server client etc of the template-bp web ecosystem's.
-template-bp web is thought out to follow Microfrontend based architecture to seperate out builds and follow code splitting for seperate applications. It is also thought out as a single repo based codebase for backend and frontend included
+A simple monorepo test task to demonstrate Full stack application with React and NestJS. We have simply 3 pages: /home, /create-new, and update user. When the server starts at home page all the users get listed. Clicking on user will take it to update page and Create New User button will take you to the create new user page.
 
 ## Available Scripts
 
@@ -54,18 +53,23 @@ Standard `package.json` file for the repository (`inside root directory`). it sp
 
 - Versions of softwares as mentioned below in the Dev environment section
 
+## Environment Setup
+
+- Create a .env at the project root and copy all the contents of the .env.example for test purposes or specific ones if you have any
+
 ## Setup
 
 - `yarn` - To install dependencies
-- `yarn start:client` - To start web-client
+- `docker compose up` - This will start the mongodb and nestjs service.
+- `yarn start:client` - To start frontend app at localhost:3000
 
 ## Development Environment
 
-- NodeJS: v18.15.0
-- NPM: v9.5.0
+- NodeJS: v18.16.0
+- NPM: v9.5.1
 - Yarn: v1.22.19
 - OS: Mac 15+ / Ubuntu 20.04LTS+
-- Docker version 23.0.3
+- Docker version 24.0.1
 - Docker Compose version v2.4.1
 
 ## Code formatting
