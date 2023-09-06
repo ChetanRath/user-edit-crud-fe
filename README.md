@@ -2,6 +2,10 @@
 
 A simple monorepo test task to demonstrate Full stack application with React and NestJS. We have simply 3 pages: /home, /create-new, and update user. When the server starts at home page all the users get listed. Clicking on user will take it to update page and Create New User button will take you to the create new user page.
 
+## Things to note
+
+We have majorly covered funtionality and given less preference to the design specifics due to time constraint and scope of the test task
+
 ## Available Scripts
 
 In the project directory, you can run:
