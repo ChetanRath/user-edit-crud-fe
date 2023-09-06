@@ -2,7 +2,6 @@ import React, { useEffect, useMemo } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import { Link, useParams } from "react-router-dom";
 import { Box, CircularProgress, Typography } from "@mui/material";
-import Grid from "@mui/material/Grid";
 import { UpateUserParams, userApi } from "api";
 import { useAsyncFn } from "hooks/useAsync";
 import { useEffectOnce } from "hooks/useEffectOnce";
@@ -10,8 +9,7 @@ import { PageURL } from "router/pageURL";
 import { UserForm } from "utils/types";
 import { updateFormModel } from "utils/types/common/formMapping";
 
-import { FormTextField } from "components/atoms/FormTextField";
-import { LoadingButton } from "components/atoms/LoadingButton";
+import { FormMapper } from "components/organisms";
 
 import "./style.scss";
 
@@ -80,29 +78,12 @@ export const UpdateUser = () => {
           }}
           className='form__container'
         >
-          <Grid container rowSpacing={4} columnSpacing={{ xs: 3 }}>
-            {updateFormModel.map( ( item, index ) => (
-              <Grid item xs={12} md={6} key={index}>
-                <FormTextField
-                  {...register( item.name as keyof UserForm, {
-                    ...item.rhfProps,
-                  })}
-                  textFieldProps={item.tfProps}
-                />
-              </Grid>
-            ) )}
-            <Grid item xs={12} alignItems={"center"}>
-              <LoadingButton
-                isLoading={isUpdateLoading || isUserDetailLoading}
-                buttonProps={{
-                  variant: "contained",
-                  type: "submit",
-                }}
-              >
-                {buttonName}
-              </LoadingButton>
-            </Grid>
-          </Grid>
+          <FormMapper
+            model={updateFormModel}
+            register={register}
+            isLoading={isUpdateLoading || isUserDetailLoading}
+            buttonName={buttonName}
+          />
         </form>
       </FormProvider>
       {!isUpdateLoading && updateResponse && !isUpdateUserError && (

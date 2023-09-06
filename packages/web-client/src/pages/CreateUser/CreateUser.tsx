@@ -2,15 +2,13 @@ import React from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import { Box, Typography } from "@mui/material";
-import Grid from "@mui/material/Grid";
 import { AddNewUserParams, userApi } from "api";
 import { useAsyncFn } from "hooks/useAsync";
 import { PageURL } from "router/pageURL";
 import { UserForm } from "utils/types";
 import { createFormModel } from "utils/types/common/formMapping";
 
-import { FormTextField } from "components/atoms/FormTextField";
-import { LoadingButton } from "components/atoms/LoadingButton";
+import { FormMapper } from "components/organisms";
 
 import "./style.scss";
 
@@ -47,29 +45,7 @@ export const CreateUser: React.FC = () => {
           }}
           className='form__container'
         >
-          <Grid container rowSpacing={4} columnSpacing={{ xs: 3 }}>
-            {createFormModel.map( ( item, index ) => (
-              <Grid item xs={12} md={6} key={index}>
-                <FormTextField
-                  {...register( item.name as keyof UserForm, {
-                    ...item.rhfProps,
-                  })}
-                  textFieldProps={item.tfProps}
-                />
-              </Grid>
-            ) )}
-            <Grid item xs={12} alignItems={"center"}>
-              <LoadingButton
-                isLoading={isLoading}
-                buttonProps={{
-                  variant: "contained",
-                  type: "submit",
-                }}
-              >
-                {buttonName}
-              </LoadingButton>
-            </Grid>
-          </Grid>
+          <FormMapper model={createFormModel} register={register} isLoading={isLoading} buttonName={buttonName} />
         </form>
         {!isLoading && response && !isAddUserError && <Typography variant='h3'>User Created Successfully</Typography>}
         {isAddUserError && <Typography variant='h3'>Something Went wrong, Try Again</Typography>}

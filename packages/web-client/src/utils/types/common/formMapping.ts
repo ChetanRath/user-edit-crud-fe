@@ -1,6 +1,8 @@
+import { FieldConfig } from "..";
+
 import { EMAIL_VALIDATION_REGEX } from "./constants";
 
-export const updateFormModel = [
+export const updateFormModel: FieldConfig[] = [
   {
     name: "first_name",
     rhfProps: {
@@ -59,7 +61,7 @@ export const updateFormModel = [
   },
 ];
 
-export const createFormModel = [
+export const createFormModel: FieldConfig[] = [
   {
     name: "first_name",
     rhfProps: {
