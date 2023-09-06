@@ -49,7 +49,7 @@ export const updateFormModel = [
       maxLength: 13,
       pattern: {
         value: /^[0-9]+$/,
-        message: "Enter valid Ph No.",
+        message: "Enter valid Ph No. with max 13 digits only",
       },
     },
     tfProps: {

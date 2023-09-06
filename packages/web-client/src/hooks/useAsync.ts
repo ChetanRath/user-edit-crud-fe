@@ -12,7 +12,7 @@ export function useAsyncFn<T, P>( fn: AsyncFn<T, P> ) {
     setState({ isLoading: true, err: null, res: null });
     try {
       const data: T = await fn( args[0] );
-      setState({ ...state, isLoading: false, res: data });
+      setTimeout( () => setState({ ...state, isLoading: false, res: data, err: null }), 1500 );
     } catch ( err: unknown ) {
       setState({ ...state, isLoading: false, err });
     }

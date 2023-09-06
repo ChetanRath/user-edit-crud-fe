@@ -1,6 +1,6 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { Box, Button, List, ListItem, Typography } from "@mui/material";
+import { Box, Button, CircularProgress, List, ListItem, Typography } from "@mui/material";
 import { userApi } from "api";
 import { useAsyncFn } from "hooks/useAsync";
 import { useEffectOnce } from "hooks/useEffectOnce";
@@ -25,7 +25,7 @@ export const Home = () => {
       </Button>
       <Typography variant='h4'>All users list. Click them to edit their details</Typography>
       {isLoading ? (
-        <>{"Loading..."}</>
+        <CircularProgress size={50} />
       ) : (
         <List>
           {userData &&

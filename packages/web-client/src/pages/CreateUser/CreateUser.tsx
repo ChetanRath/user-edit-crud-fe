@@ -1,6 +1,6 @@
 import React from "react";
 import { FormProvider, useForm } from "react-hook-form";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Box, Typography } from "@mui/material";
 import Grid from "@mui/material/Grid";
 import { AddNewUserParams, userApi } from "api";
@@ -14,29 +14,25 @@ import { LoadingButton } from "components/atoms/LoadingButton";
 
 import "./style.scss";
 
-export const CreateUser = ({ buttonName = "Create" }: any ) => {
-  const { isLoading, asyncFunc: addUser } = useAsyncFn( userApi.addUser );
-  const navigate = useNavigate();
+const buttonName = "Create";
+
+export const CreateUser: React.FC = () => {
+  const { isLoading, err: addUserError, asyncFunc: addUser, res: response } = useAsyncFn( userApi.addUser );
   const form = useForm<UserForm>({
     mode: "onChange",
   });
-  const {
-    register,
-    handleSubmit,
-    watch,
-    formState: { errors },
-    getValues,
-  } = form;
+  const { register, handleSubmit, watch } = form;
 
   watch();
 
   const onSubmit = async ( userData: AddNewUserParams ) => {
     await addUser( userData );
-    navigate( PageURL.ROOT );
   };
 
+  const isAddUserError = Boolean( addUserError );
+
   return (
-    <div className='home__container'>
+    <div className='user-page__container'>
       <Box sx={{ display: "flex" }}>
         <Typography variant='h4'> {`${buttonName} user`} </Typography>
         <Link className='update-user__link link__common' to={PageURL.BASE}>
@@ -55,7 +51,7 @@ export const CreateUser = ({ buttonName = "Create" }: any ) => {
             {createFormModel.map( ( item, index ) => (
               <Grid item xs={12} md={6} key={index}>
                 <FormTextField
-                  {...register( item.name  as keyof UserForm, {
+                  {...register( item.name as keyof UserForm, {
                     ...item.rhfProps,
                   })}
                   textFieldProps={item.tfProps}
@@ -67,13 +63,16 @@ export const CreateUser = ({ buttonName = "Create" }: any ) => {
                 isLoading={isLoading}
                 buttonProps={{
                   variant: "contained",
-                  type: "submit"
-                }}>
+                  type: "submit",
+                }}
+              >
                 {buttonName}
               </LoadingButton>
             </Grid>
           </Grid>
         </form>
+        {!isLoading && response && !isAddUserError && <Typography variant='h3'>User Created Successfully</Typography>}
+        {isAddUserError && <Typography variant='h3'>Something Went wrong, Try Again</Typography>}
       </FormProvider>
     </div>
   );
