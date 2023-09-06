@@ -1,6 +1,4 @@
-import { CreateUser } from "pages/CreateUser";
-import { Home } from "pages/Home";
-import { UpdateUser } from "pages/UpdateUser";
+import { CreateUser, Home, UpdateUser } from "pages";
 
 import { PageURL } from "./pageURL";
 import { RouteProps } from "./types";
