@@ -2,8 +2,7 @@ import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Box, Button, CircularProgress, List, ListItem, Typography } from "@mui/material";
 import { userApi } from "api";
-import { useAsyncFn } from "hooks/useAsync";
-import { useEffectOnce } from "hooks/useEffectOnce";
+import { useAsyncFn, useEffectOnce } from "hooks";
 import { PageURL } from "router/pageURL";
 
 export const Home = () => {
@@ -23,7 +22,7 @@ export const Home = () => {
       <Button variant='contained' onClick={() => navigate( PageURL.CREATE_USER )}>
         Create New User
       </Button>
-      <Typography variant='h4'>All users list. Click them to edit their details</Typography>
+      <Typography variant='h4'>All users Click them to edit their details</Typography>
       {isLoading ? (
         <CircularProgress size={50} />
       ) : (
