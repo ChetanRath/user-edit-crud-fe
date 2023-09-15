@@ -74,7 +74,7 @@ We assume that you have a database connected properly and running at the given c
 
 - `yarn` - To install dependencies
 - `yarn run start:api-urls` - This will start the backend at port 12345 by default
-- `yarn start:client` - To start frontend app at localhost:3000
+- `yarn run start:client` - To start frontend app at localhost:3000
 
 ## Development Environment
 
