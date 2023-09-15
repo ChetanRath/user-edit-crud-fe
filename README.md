@@ -53,18 +53,27 @@ Standard `package.json` file for the repository (`inside root directory`). it sp
 
 **Note: package specific dependencies should not be specified here**
 
-## Prerequisites
-
-- Versions of softwares as mentioned below in the Dev environment section
-
 ## Environment Setup
 
 - Create a .env at the project root and copy all the contents of the .env.example for test purposes or specific ones if you have any
+- Create a .env.development file at /packages/api-urls/.env.development and copy down all the contents of the /packages/api-urls/.env.example
+
+## Prerequisites
+
+- Versions of softwares as mentioned below in the Dev environment section
+- A database server up at 27017 port locally installed. You can use the one provided by this repo if you have proper docker setup. That database server url is given in /packages/api-urls/.env.example
+
+## Database connectivity
+
+- Install a mongo db at your machine and add the connection string to /packages/api-urls/.env.development's MONGO_DB_URI
+- If your docker works properly. You can use the database setup provided by this repo. That database server url is given in /packages/api-urls/.env.example, copy that to /packages/api-urls/.env.development's MONGO_DB_URI
 
 ## Setup
 
+We assume that you have a database connected properly and running at the given connection string
+
 - `yarn` - To install dependencies
-- `docker compose up` - This will start the mongodb and nestjs service.
+- `yarn run start:api-urls` - This will start the backend at port 12345 by default
 - `yarn start:client` - To start frontend app at localhost:3000
 
 ## Development Environment
